@@ -14,7 +14,6 @@ end
 # "33d14'3.276\"N" => -97.57788916666667
 #
 def parse_degrees(s)
-
   a = s.match(/^([0-9]+)d(([0-9]+)')?(([.0-9]+)")?([NSEW])$/)
 
   # Examples:
@@ -24,7 +23,8 @@ def parse_degrees(s)
   secs = (a[5].to_f || 0.0)
   mins = (a[3].to_i || 0) + (secs/60)
   deg = a[1].to_i + (mins/60)
-  (a[6] == "N" || a[6] == "E" ? -deg : deg)
+
+  return (a[6] == "S" || a[6] == "W") ? -deg : deg
 end
 
 
